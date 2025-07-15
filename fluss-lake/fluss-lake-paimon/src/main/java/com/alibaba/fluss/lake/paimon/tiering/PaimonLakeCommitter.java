@@ -65,7 +65,7 @@ public class PaimonLakeCommitter implements LakeCommitter<PaimonWriteResult, Pai
     }
 
     @Override
-    public PaimonCommittable toCommitable(List<PaimonWriteResult> paimonWriteResults)
+    public PaimonCommittable toCommittable(List<PaimonWriteResult> paimonWriteResults)
             throws IOException {
         ManifestCommittable committable = new ManifestCommittable(COMMIT_IDENTIFIER);
         for (PaimonWriteResult paimonWriteResult : paimonWriteResults) {
@@ -183,7 +183,7 @@ public class PaimonLakeCommitter implements LakeCommitter<PaimonWriteResult, Pai
                 paimonCatalog.close();
             }
         } catch (Exception e) {
-            throw new IOException("Fail to close PaimonLakeCommitter.", e);
+            throw new IOException("Failed to close PaimonLakeCommitter.", e);
         }
     }
 
@@ -191,7 +191,7 @@ public class PaimonLakeCommitter implements LakeCommitter<PaimonWriteResult, Pai
         try {
             return (FileStoreTable) paimonCatalog.getTable(toPaimon(tablePath));
         } catch (Exception e) {
-            throw new IOException("Fail to get table " + tablePath + " in Paimon.");
+            throw new IOException("Failed to get table " + tablePath + " in Paimon.", e);
         }
     }
 
